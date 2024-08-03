@@ -1,0 +1,92 @@
+/* AboutUs.css */
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.about-page {
+  text-align: center;
+}
+
+.primary-button {
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.primary-button:hover {
+  background-color: rgb(75, 75, 75);
+}
+
+.intro-section {
+  padding: 130px 20px 80px;
+  background: #f0f0f0;
+}
+
+.intro-section h1 {
+  font-size: 42px;
+  margin: 0 0 10px;
+}
+
+.intro-section p {
+  font-size: 22px;
+  margin: 0 0 20px;
+  max-width: 800px;
+  margin: 0 auto 20px;
+}
+
+.info-section {
+  padding: 20px 60px;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start; /* Align items to the start of the flex container */
+  justify-content: space-between;
+  margin-bottom: 60px;
+}
+
+.info-image {
+  width: 45%; /* Adjust the width to fit the layout */
+  height: auto; /* Maintain aspect ratio */
+  max-height: 300px;
+  object-fit: contain; /* Ensure the entire image is visible */
+}
+
+.text-section {
+  width: 45%;
+  text-align: left;
+}
+
+.text-section.left-align {
+  text-align: left;
+}
+
+.text-section.right-align {
+  text-align: left; /* Ensure text is left-aligned even on the right */
+}
+
+.text-section h2 {
+  font-size: 28px;
+}
+
+.text-section p {
+  font-size: 20px;
+}
+
+
+
+
+
+footer {
+  padding: 20px;
+  background: #333;
+  color: #fff;
+}

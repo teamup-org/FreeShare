@@ -1,0 +1,22 @@
+footer {
+  padding: 20px;
+  background: #333;
+  color: #fff;
+  text-align: center;
+}
+
+footer button {
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  background: #fff;
+  color: #333;
+  border: none;
+}
+
+.content-item img {
+  width: auto; /* Adjust the width to fit the layout */
+  height: auto; /* Maintain aspect ratio */
+  max-height: 400px;
+  object-fit: contain; /* Ensure the entire image is visible */
+}
