@@ -4,8 +4,10 @@ import { useAuth0 } from '@auth0/auth0-react';
 import Header from './Header';
 import './Profile.css';
 import ProfileDescription from './ProfileDescription';
+import AIResponseLog from './AIResponseLog';
 
 const Profile = () => {
+  
   const { user, isAuthenticated, isLoading } = useAuth0();
   const [isEditingDescription, setIsEditingDescription] = useState(false);
   const [profileDescription, setProfileDescription] = useState('');
@@ -109,6 +111,7 @@ const Profile = () => {
             {isEditingDescription ? (
               <div style={{width:'100%'}}>
                 <ProfileDescription 
+                  email={user.email}
                   text={profileDescription}
                   onChange={handleDescriptionChange}
                 />
