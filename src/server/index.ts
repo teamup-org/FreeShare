@@ -14,7 +14,7 @@ const openai = new OpenAI({apiKey : process.env.OPENAI_API_KEY});
 app.use(cors())
 app.use(express.json())
 
-const url = process.env.DATABSE_URL ||'mongodb://localhost:27017'; 
+const url = process.env.DATABASE_URL ||'mongodb://localhost:27017'; 
 // const url = 'mongodb://root:example@localhost:27017'; // use this link when using Docker for MongoDB
 const dbName = 'TeamUp';
 const client = new MongoClient(url);
@@ -266,6 +266,10 @@ app.get('*', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
+});
+
+app.listen(url, () => {
+  console.log(`DB url is ${url}`);
 });
 
 export default app;
