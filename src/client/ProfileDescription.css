@@ -1,22 +1,28 @@
 .profile-box {
-    display: 'flex';
-    flex-direction: 'row';
-    align-items: 'stretch';
-    border: '1px solid #ccc';
-    border-radius: '8px'
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    border: 1px solid #ccc;
+    border-radius: 8px
+}
+
+.edit-pd-box {
+    flex: 1;
+    display: flex;
+    align-items: stretch;
 }
 
 .profile-output {
-    flex: '1';
-    padding: '10px';
-    background-color: '#f9f9f9';
-    align-items: 'center';
-    justify-content: 'center';
-    border-radius: '8px'
+    flex: 1;
+    padding: 10px;
+    background-color: #f9f9f9;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px
 }
 
 .rewrite-button {
-    display: 'flex';
-    justify-content: 'space-between';
-    margin-bottom: '10px'
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px
 }

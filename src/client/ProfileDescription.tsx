@@ -1,14 +1,15 @@
 import React, {useRef, useState, useEffect} from "react";
 import { Button, TextField, Typography, Slider, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import "./ProfileDescription.css";
+import AIResponseLog from "./AIResponseLog";
 
 type ProfileDescriptionProps = {
+    email: any,
     text: string,
     onChange?: (event: any) => void
 }
 
-const ProfileDescription = ({text, onChange}:ProfileDescriptionProps) => {
-
+const ProfileDescription = ({email, text, onChange}:ProfileDescriptionProps) => {
     const [isLoading, setIsLoading] = useState(false);
     //const [descriptionRef, setDescriptionRef] = useState('');
     const [message, setMessage] = useState('');
@@ -28,6 +29,7 @@ const ProfileDescription = ({text, onChange}:ProfileDescriptionProps) => {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
+                        user: email,
                         message: reqBody,
                         temperature: temperature,
                         maxWords: maxWords,
@@ -179,6 +181,9 @@ const ProfileDescription = ({text, onChange}:ProfileDescriptionProps) => {
                     min={20}
                     max={50}
                 />
+            </div>
+            <div style={{display: advanceSettingDisplay ? 'block' : 'none', margin: '10px'}}>
+                <AIResponseLog />
             </div>
         </div>
     );
