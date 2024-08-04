@@ -15,8 +15,9 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background: #f8f8f8;
-  border-bottom: 1px solid #ddd;
+  background: #FFF8EA;
+  /* border-bottom: 1px solid #ddd; */
+  border: 0px;
   position: fixed;
   width: 100%;
   top: 0;
@@ -24,15 +25,18 @@ header {
   z-index: 1000;
 }
 
-.logo-image {
-  height: 40px; /* Adjust height as needed */
-}
-
 nav ul {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
+  justify-content: space-between;
+}
+
+.header-list-bar {
+  width: 100%;
+  display: flex ;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -47,7 +51,7 @@ nav a, .nav-button {
 }
 
 .nav-button {
-  background-color: black;
+  background-color: #659639;
   color: white;
   padding: 10px 20px;
   border-radius: 5px;
@@ -55,110 +59,77 @@ nav a, .nav-button {
   display: inline-block;
 }
 
-.button {
-  background-color: black;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  font-size: 16px; /* Increased button font size */
-  text-decoration: none;
-}
-
-.hero {
-  padding: 130px 20px 80px;
-  background: #f0f0f0;
-}
-
-.hero h1 {
-  font-size: 42px; /* Increased font size */
-  margin: 0 0 10px;
-}
-
-.hero p {
-  font-size: 22px; /* Increased font size */
-  margin: 0 0 20px;
-  max-width: 800px; /* Added max-width */
-  margin: 0 auto 20px; /* Center the paragraph */
-}
-
-.content {
-  padding: 20px 60px; /* Increase left and right padding */
-}
-
-.content-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 60px; /* Increase padding between sections */
-}
-
-.content-item img {
-  width: 50%;
-  height: auto;
-  max-height: 300px;
-  object-fit: cover;
-}
-
-.text-container {
-  width: 45%;
-  text-align: left;
-}
-
-.text-container h2 {
-  font-size: 28px; /* Increased font size */
-}
-
-.text-container p {
-  font-size: 20px; /* Increased font size */
-}
-
-.features {
-  background: #f8f8f8;
-  padding: 30px 60px 60px; /* Decreased top padding */
-  text-align: left;
-}
-
-.features h2 {
-  font-size: 28px; /* Increased font size */
-}
-
-.features-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.feature-item {
-  width: 45%;
-  margin: 10px 0;
-}
-
-.features-grid .feature-item:nth-child(even) {
-  margin-left: auto; /* Move even items to the right */
-}
-
-.feature-item h3 {
-  font-size: 24px; /* Slightly increased font size */
-  font-weight: bold;
-}
-
-.feature-item p {
-  font-size: 18px; /* Increased font size */
-}
 
 footer {
-  padding: 20px;
-  background: #333;
-  color: #fff;
+  padding: 40px;
+  background: white !important;
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
 }
 
-footer button {
-  padding: 10px 20px;
-  font-size: 18px; /* Increased font size */
-  cursor: pointer;
-  background: #fff;
-  color: #333;
-  border: none;
+.footer-text {
+  padding-left: 40px;
+  padding-right: 40px;
+  font-size: 17px;
+  color: #659639;
+}
+
+main {
+  background-color: #FFF8EA;
+  height: 86vh;
+}
+
+.welcome-section {
+  padding: 30px;
+  text-align: center;
+}
+
+.center-element {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.freeshare-logo {
+  width: 200px; 
+}
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  padding-top: 70px;
+}
+
+.welcome-text-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.welcome-text-light {
+  font-size: 35px;
+  font-weight: light;
+  color: #659639;
+}
+
+.welcome-text-bold {
+  font-size: 42px;
+  font-weight: bold;
+  color: #659639;
+}
+
+.description-text {
+  font-weight: light;
+  font-size: 20px;
+  color: #659639;
+}
+
+.footr-social-icons-container {
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  justify-content: top;
 }

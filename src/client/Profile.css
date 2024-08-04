@@ -27,17 +27,6 @@ body {
     margin-bottom: 20px;
   }
   
-  .profile-container h2 {
-    font-size: 24px;
-    margin: 10px 0;
-    color: #333;
-  }
-  
-  .profile-container p {
-    font-size: 18px;
-    color: #666;
-  }
-  
   .header {
     background-color: #333;
     color: white;
@@ -52,4 +41,45 @@ body {
   
   .content {
     padding-top: 80px;
+  }
+
+  .user-name-text {
+    font-size: 25px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .user-info-text {
+    font-size: 16px;
+    font-weight: thin;
+    color: #666;
+  }
+
+  .profile-info-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 40px;
+    text-align: left;
+  }
+
+  .profile-photo-container {
+    margin-right: 40px;
+  }
+
+  .profile-info-list-container button {
+    background-color: #FFCE57;
+    color: #333;
+    font: 7px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 15px;
+    border: 0px;
+    margin-top: 20px;
+
+  }
+
+  .profile-description-container {
+    text-align: left;
+    width: 100%;
   }
