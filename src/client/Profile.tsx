@@ -105,15 +105,10 @@ const Profile = () => {
         <Header />
         <div className="content">
           <div className="profile-container">
-<<<<<<< HEAD
-            <div className="profile-info-container">
-              <div className="profile-photo-container">
-                <img src={user.picture} alt={user.name} />
-=======
             <img src={user.picture} alt={user.name} />
             <h2>{user.name}</h2>
             <p>{user.email}</p>
-            {isEditingDescription ? (
+            {isEditingDescription ? ( <div>
               <div style={{width:'100%'}}>
                 <ProfileDescription 
                   email={user.email}
@@ -122,18 +117,18 @@ const Profile = () => {
                 />
                 <button onClick={handleSaveDescription}>Save</button>
                 <button onClick={handleCancelEdit}>Cancel</button>
->>>>>>> main
               </div>
               <div className="profile-info-list-container">
                 <p className="user-name-text">{user.name}</p>
                 <p className="user-info-text">{user.email}</p>
                 <button> Edit profile </button>
               </div>
-            </div>
+            </div>):(<div></div>)}
             <div className="profile-description-container">
               {isEditingDescription ? (
                 <div style={{width:'100%'}}>
                   <ProfileDescription 
+                    email={user.email}
                     text={profileDescription}
                     onChange={handleDescriptionChange}
                   />
