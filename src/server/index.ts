@@ -1,7 +1,10 @@
 import express from 'express';
 import path from 'path';
+import fs from 'fs';
 import cors from 'cors'
 import OpenAI from 'openai';
+import multer from 'multer';
+
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -34,7 +37,7 @@ async function setupDb() {
     await client.connect();
     console.log("Connected to MongoDB");
     const db = client.db(dbName);
-    const collections = ['users'];
+    const collections = ['users', 'ai_responses', 'images'];
 
     const existingCollections = await db.listCollections().toArray();
     const existingCollectionNames = existingCollections.map(col => col.name);
@@ -56,6 +59,10 @@ async function setupDb() {
 }
 
 setupDb().catch(console.error);
+
+// Multer configuration
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 app.post('/api/users/create', async (req, res) => {
   try {
@@ -218,6 +225,80 @@ app.get('/api/ai_responses', async (req, res) => {
   }
 });
 
+// POST endpoint to handle image upload
+app.post('/images/upload', upload.single('image'), async (req, res) => {
+  try {
+      if (!req.file) {
+          return res.status(400).json({ error: 'No file uploaded' });
+      }
+
+      const base64Image = req.file.buffer.toString('base64');
+      const client = await MongoClient.connect(url);
+      const db = client.db(dbName);
+      const images = db.collection('images');
+
+      const result = await images.insertOne({ 
+        image: base64Image, 
+        user: req.body.user, 
+        createdAt: new Date() 
+      });
+
+      console.log(`New image uploaded with ID: ${result.insertedId}`);
+      await client.close();
+
+      res.status(201).json({ message: 'Image uploaded', id: result.insertedId });
+
+  } catch (e: any) {
+      console.error('Error uploading image:', e);
+      res.status(500).json({ error: 'Error uploading image', details: e.message });
+  }
+});
+
+app.get('/images/:id', async (req, res) => {
+  try {
+    const client = await MongoClient.connect(url);
+    const db = client.db(dbName);
+    const images = db.collection('images');
+
+    const image = await images.findOne({ _id: new ObjectId(req.params.id) });
+
+    if (!image) {
+      await client.close();
+      return res.status(404).json({ error: 'Image not found' });
+    }
+
+    await client.close();
+    res.json({ image: image.image.toString('base64') });
+  } catch (error) {
+    console.error('Error fetching image:', error);
+    res.status(500).json({ error: 'Error fetching image' });
+  }
+});
+
+app.get('/image/gallery', async (req, res) => {
+  try {
+    // currently just grabs entire collection
+    const client = await MongoClient.connect(url);
+    const db = client.db(dbName);
+    const imagesCollection = db.collection('images');
+
+    const images = await imagesCollection.find().sort({ createdAt: -1 }).toArray();
+    console.log('Images found:', images.length);
+    console.log('First image:', images[0]);
+
+    const formattedImages = images.map((img) => ({
+      ...img._doc,
+      image: img.image ? img.image.toString('base64') : null // Convert Buffer to base64 string
+    }));
+
+    res.json(formattedImages);
+  } catch (error) {
+    console.error('Error fetching gallery:', error);
+    res.status(500).json({ error: 'Error fetching gallery' });
+  }
+});
+
+
 // Serve static files from the 'dist' directory
 app.use(express.static(path.join(__dirname, '..')));
 
@@ -266,10 +347,6 @@ app.get('*', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
-});
-
-app.listen(url, () => {
-  console.log(`DB url is ${url}`);
 });
 
 export default app;
