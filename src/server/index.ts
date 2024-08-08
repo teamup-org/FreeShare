@@ -275,7 +275,7 @@ app.get('/images/:id', async (req, res) => {
   }
 });
 
-app.get('/image/gallery', async (req, res) => {
+app.get('/images-gallery', async (req, res) => {
   try {
     // currently just grabs entire collection
     const client = await MongoClient.connect(url);
@@ -288,7 +288,9 @@ app.get('/image/gallery', async (req, res) => {
 
     const formattedImages = images.map((img) => ({
       ...img._doc,
-      image: img.image ? img.image.toString('base64') : null // Convert Buffer to base64 string
+      image: img.image ? img.image.toString('base64') : null, // Convert Buffer to base64 string
+      id: img._id.toString(),
+      user: img.user.toString() || 'Anonymous',
     }));
 
     res.json(formattedImages);
