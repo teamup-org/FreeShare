@@ -237,30 +237,32 @@ app.post('/images/upload', upload.single('image'), async (req, res) => {
       const db = client.db(dbName);
       const images = db.collection('images');
 
-      const result = await images.insertOne({ 
-        image: base64Image, 
-        user: req.body.user, 
-        createdAt: new Date() 
-      });
-
-      console.log(`New image uploaded with ID: ${result.insertedId}`);
-      await client.close();
-
-      res.status(201).json({ message: 'Image uploaded', id: result.insertedId });
-
       const AIResponse = await openai.chat.completions.create({
         messages: [{ role: "user", content: [
           {"type": "text", "text": "Please Give a Descriptive Summary of the Provded Image."},
           {"type": "image_url",
             "image_url": {
-              "url": `http://localhost:3000/images/${result.insertedId}`
+              "url": `data:image/jpeg;base64,${base64Image}`
             }
           }
         ]}],
-        model: "gpt-3.5-turbo",
+        model: "gpt-4o-mini",
       });
 
+      const result = await images.insertOne({ 
+        image: base64Image, 
+        user: req.body.user, 
+        createdAt: new Date(),
+        AIdescription: AIResponse.choices[0].message.content 
+      });
+
+      console.log(`New image uploaded with ID: ${result.insertedId}`);
+
+      res.status(201).json({ message: 'Image uploaded', id: result.insertedId , description: AIResponse.choices[0].message.content });
+
       console.log('AI Response:', AIResponse.choices[0].message.content);
+
+      await client.close();
 
 
   } catch (e: any) {

@@ -6,6 +6,7 @@ const ImageAI = (image: any, description: string) => {
     return (
         <div>
             <h1>Image AI</h1>
+            <p>{description}</p>
         </div>
     );
 };

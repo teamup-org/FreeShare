@@ -18,7 +18,7 @@ const UploadImgPage = () => {
     const [loading, setLoading] = useState(false);
     const [AIResult, setAIResult] = useState(false);
 
-    const [ImageDescription, setImageDescription] = useState('');
+    const [ImageDescription, setImageDescription] = useState(null);
 
     useEffect(() => {
         console.log('imageUrl:', imageUrl);
@@ -53,9 +53,15 @@ const UploadImgPage = () => {
                 method: "POST",
                 body: formData,
             });
-            if (response.ok) {
-                console.log('Image uploaded successfully');
+
+            if (!response.ok) {
+                throw new Error('Failed to upload image');
             }
+
+            const responseData = await response.json();
+            console.log('responseData:', responseData);
+            setImageDescription(responseData.description); 
+            setAIResult(true);
 
         } catch (error) {
             console.error('Error uploading image:', error);
@@ -65,13 +71,9 @@ const UploadImgPage = () => {
         }
 
         console.log('Image uploaded:', selectedFile);
-        setAIResult(true);
 
         setSelectedFile(null);
         setWarning('');
-
-        //set the AI result here
-        setImageDescription('description');
     };
 
     return (
@@ -103,7 +105,12 @@ const UploadImgPage = () => {
                         <img src={imageUrl} alt="Uploaded" style={{ maxWidth: '100%', maxHeight: '300px', marginTop: '20px' }} />
                     </div>
                 )}
-                {AIResult ? (<ImageAI image={selectedFile} description={AIResult} />) : null}
+                {AIResult && (
+                    <div className='image-description-container'>
+                        <h2 style={{marginBottom: '10px'}}>AI Image description</h2>
+                        {ImageDescription}
+                    </div>
+                )}
                 
             </div>
             <Footer />

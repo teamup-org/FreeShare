@@ -10,7 +10,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 90vh;
+    height: 100%;
 }
 
 .upload-main-container {
@@ -42,4 +42,13 @@ body {
     border-radius: 5px;
     margin: 0 20px;
     display: inline-block;
+}
+
+.image-description-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    padding: 40px 80px;
 }

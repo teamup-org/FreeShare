@@ -142,19 +142,19 @@ const ProfileGallery = () => {
               <ProfileResult />
             </div>
           </div>
-          <div>
-            <h1>Gallery</h1>
+        </main>
+
+        {/* <div>
             <div className="image-gallery">
               {imageList.map((base64String, index) => (
                 <img
                   key={index}
                   src={`data:image/jpeg;base64,${base64String}`}
-                  style={{ width: '200px', margin: '10px' }}
+                  style={{ width: '150px', margin: '10px' }}
                 />
               ))}
             </div>
-          </div>
-        </main>
+          </div> */}
         <Footer />
       </div>
     )
