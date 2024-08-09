@@ -21,6 +21,12 @@ const Header = () => {
             <Link to="/profile">Profile</Link>
           </li>
           <li>
+            <Link to="/upload-image">Upload image</Link>
+          </li>
+          <li>
+            <Link to="/image-gallery">Image Gallery</Link>
+          </li>
+          <li>
             <button
               className="nav-button button"
               onClick={() =>

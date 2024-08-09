@@ -108,6 +108,23 @@ const ProfileGallery = () => {
     return <div>Loading ...</div>;
   }
 
+  const [imageList, setImageList] = useState([]);
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/images-gallery');
+        const data = await response.json();
+        const images = data.map((x: { image: any; }) => x.image);
+        setImageList(images);
+      } catch (error) {
+        console.error('Error fetching images:', error);
+      }
+    };
+
+    fetchImages();
+  }, []);
+
   return (
     isAuthenticated &&
     user && (
@@ -126,6 +143,18 @@ const ProfileGallery = () => {
             </div>
           </div>
         </main>
+
+        {/* <div>
+            <div className="image-gallery">
+              {imageList.map((base64String, index) => (
+                <img
+                  key={index}
+                  src={`data:image/jpeg;base64,${base64String}`}
+                  style={{ width: '150px', margin: '10px' }}
+                />
+              ))}
+            </div>
+          </div> */}
         <Footer />
       </div>
     )

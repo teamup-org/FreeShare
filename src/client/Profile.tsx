@@ -17,7 +17,7 @@ const Profile = () => {
   }
 
   const handleEditDescription = () => {
-    setIsEditingDescription(true);
+    setIsEditingDescription(!isEditingDescription);
   };
 
   const handleSaveDescription = async () => {
@@ -106,25 +106,29 @@ const Profile = () => {
         <div className="content">
           <div className="profile-container">
             <img src={user.picture} alt={user.name} />
-            <h2>{user.name}</h2>
-            <p>{user.email}</p>
-            {isEditingDescription ? (
-              <div style={{width:'100%'}}>
-                <ProfileDescription 
-                  email={user.email}
-                  text={profileDescription}
-                  onChange={handleDescriptionChange}
-                />
-                <button onClick={handleSaveDescription}>Save</button>
-                <button onClick={handleCancelEdit}>Cancel</button>
+            <div className="profile-info-list-container">
+                <p className="user-name-text">{user.name}</p>
+                <p className="user-info-text">{user.email}</p>
+                <button onClick={handleEditDescription}> Edit profile </button>
               </div>
-            ) : (
-              <div>
-                <p>Profile Description:</p>
-                <p>{profileDescription || 'No description available'}</p>
-                <button onClick={handleEditDescription}>Edit Description</button>
-              </div>
-            )}
+            <div className="profile-description-container">
+              {isEditingDescription ? (
+                <div style={{width:'100%'}}>
+                  <ProfileDescription 
+                    email={user.email}
+                    text={profileDescription}
+                    onChange={handleDescriptionChange}
+                  />
+                  <button onClick={handleSaveDescription} className="save-button">Save</button>
+                  <button onClick={handleCancelEdit} className="cancel-button">Cancel</button>
+                </div>
+              ) : (
+                <div>
+                  <p>Profile Description:</p>
+                  <p>{profileDescription || 'No description available'}</p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
