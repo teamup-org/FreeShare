@@ -8,6 +8,7 @@ import NotFoundPage from './NotFoundPage';
 import AIProfile from './AIProfile';
 import UploadImgPage from './UploadImgPage';
 import ImageGallery from './ImageGallery';
+import UpdateProfile from './UpdateProfile';
 
 const App: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/update" element={<UpdateProfile />} />
           <Route path="/profile-gallery" element={<ProfileGallery />} />
           <Route path="/ai-profile" element={<AIProfile />} />
           <Route path="/upload-image" element={<UploadImgPage />} />

@@ -248,6 +248,21 @@ app.post('/images/upload', upload.single('image'), async (req, res) => {
 
       res.status(201).json({ message: 'Image uploaded', id: result.insertedId });
 
+      const AIResponse = await openai.chat.completions.create({
+        messages: [{ role: "user", content: [
+          {"type": "text", "text": "Please Give a Descriptive Summary of the Provded Image."},
+          {"type": "image_url",
+            "image_url": {
+              "url": `http://localhost:3000/images/${result.insertedId}`
+            }
+          }
+        ]}],
+        model: "gpt-3.5-turbo",
+      });
+
+      console.log('AI Response:', AIResponse.choices[0].message.content);
+
+
   } catch (e: any) {
       console.error('Error uploading image:', e);
       res.status(500).json({ error: 'Error uploading image', details: e.message });
@@ -283,8 +298,8 @@ app.get('/images-gallery', async (req, res) => {
     const imagesCollection = db.collection('images');
 
     const images = await imagesCollection.find().sort({ createdAt: -1 }).toArray();
-    console.log('Images found:', images.length);
-    console.log('First image:', images[0]);
+    //console.log('Images found:', images.length);
+    //console.log('First image:', images[0]);
 
     const formattedImages = images.map((img) => ({
       ...img._doc,
