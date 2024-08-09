@@ -138,7 +138,7 @@ const HomePage = () => {
             <div>
               <p className="description-text">
                 {" "}
-                An open market for studetns to exchange unwanted items
+                An open market for students to exchange unwanted items
               </p>
             </div>
           </div>
